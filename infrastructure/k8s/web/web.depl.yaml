@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-deployment
+  namespace: app
+  labels:
+    app: web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: web
+  template:
+    metadata:
+      labels:
+        app: web
+    spec:
+      imagePullSecrets:
+        - name: ghcr-secret
+      containers:
+        - name: web
+          image: ghcr.io/awwwkshay/node-ts-web-starter
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+          env:
+            - name: NODE_ENV
+              valueFrom:
+                configMapKeyRef:
+                  name: web-config
+                  key: node_env
+            - name: NITRO_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: web-config
+                  key: nitro_port
+            - name: NITRO_API_BASE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: web-config
+                  key: nitro_api_base_url
+            - name: VITE_API_BASE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: web-config
+                  key: vite_api_base_url
+            - name: VITE_APP_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: web-config
+                  key: vite_app_name
+          resources:
+            requests:
+              cpu: "1500m"
+              memory: "128Mi"
+            limits:
+              cpu: "1500m"
+              memory: "2Gi"

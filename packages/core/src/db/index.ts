@@ -1,0 +1,1 @@
+export { todosTable } from "./schema";

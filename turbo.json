@@ -1,0 +1,53 @@
+{
+  "$schema": "https://turborepo.com/schema.json",
+  "globalDependencies": ["pnpm-lock.yaml", "pnpm-workspace.yaml"],
+  "tasks": {
+    "build:apps": {
+      "dependsOn": ["^build"],
+      "outputs": ["apps/**/dist/**"],
+      "cache": true
+    },
+    "build:packages": {
+      "dependsOn": ["^build"],
+      "outputs": ["packages/**/dist/**"],
+      "cache": true
+    },
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**"],
+      "cache": true
+    },
+    "dev": {
+      "persistent": true,
+      "cache": false,
+      "dependsOn": ["build:packages"]
+    },
+    "lint": {
+      "dependsOn": ["^lint"],
+      "outputs": []
+    },
+    "format": {
+      "dependsOn": ["^format"],
+      "outputs": []
+    },
+    "test": {
+      "dependsOn": ["^test"],
+      "outputs": []
+    },
+    "clean:dist": {
+      "cache": false,
+      "outputs": []
+    },
+    "clean:node_modules": {
+      "cache": false,
+      "outputs": []
+    },
+    "clean": {
+      "cache": false,
+      "outputs": []
+    },
+    "db:migrate": {
+      "dependsOn": ["^db:migrate"]
+    }
+  }
+}

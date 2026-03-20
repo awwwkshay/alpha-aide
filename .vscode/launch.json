@@ -1,0 +1,28 @@
+{
+    "configurations": [
+        {
+            "type": "node",
+            "name": "Remote Debugging",
+            "port": 9000,
+            "request": "attach",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "localRoot": "${workspaceFolder}/apps/api",
+            "remoteRoot": "/app/apps/api",
+            "sourceMaps": true
+        },
+        {
+            "type": "node",
+            "name": "Remote Debugging",
+            "port": 9001,
+            "request": "attach",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "localRoot": "${workspaceFolder}/apps/web",
+            "remoteRoot": "/app/apps/web",
+            "sourceMaps": true
+        }
+    ]
+}

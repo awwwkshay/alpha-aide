@@ -1,0 +1,33 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: api-job
+  namespace: app
+spec:
+  backoffLimit: 3
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: migrate
+          image: ghcr.io/awwwkshay/node-ts-api-starter
+          imagePullPolicy: Always
+          command:
+            - bash
+            - -c
+            - |
+              echo "⏳ Waiting for database..."
+              until (echo > /dev/tcp/postgres/5432) >/dev/null 2>&1; do 
+                echo "⏳ Postgres not ready yet..."
+                sleep 2
+              done
+
+              echo "🚀 Running migrations..."
+              pnpm db:migrate
+
+          env:
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: api-secret
+                  key: database_url

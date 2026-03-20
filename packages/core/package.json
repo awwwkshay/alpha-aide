@@ -1,0 +1,34 @@
+{
+  "name": "@awwwkshay/node-ts-core",
+  "version": "0.0.1",
+  "description": "Core shared utilities",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "format": "oxfmt .",
+    "format:check": "oxfmt . --check",
+    "lint": "oxlint . --fix --type-aware --type-check",
+    "clean": "rimraf dist",
+    "build": "tsdown",
+    "dev": "tsdown --watch",
+    "type-check": "tsc --noEmit"
+  },
+  "keywords": [],
+  "dependencies": {
+    "drizzle-orm": "^0.45.1",
+    "drizzle-zod": "^0.8.3",
+    "zod": "^4.3.6"
+  }
+}

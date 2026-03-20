@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: api-config
+  namespace: app
+data:
+  node_env: production
+  port: "8000"
+  client_urls: http://localhost:3000

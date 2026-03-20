@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: web-config
+  namespace: app
+data:
+  node_env: development
+  nitro_port: "3000"
+  nitro_api_base_url: http://api-service.app.svc.cluster.local
+  vite_api_base_url: http://localhost:8000
+  vite_app_name: "Node TS Starter"
